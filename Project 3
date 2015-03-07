@@ -1,3 +1,22 @@
+#START OF PROGRAM
+ 
+#Imports all from the Tkinter Python library
+
+from Tkinter import*
+import time     #Imports 'time' from the Tkinter Python library
+import random   #Imports 'random' from the Tkinter Python library
+
+#Class for the Robots
+
+window = Tk()                                                    #Creates a GUI interface window
+window.title("Group 6 | Project 3")                             #Sets the title of the window to 'Group 6 | Project 2'
+canvas = Canvas(window, width=1000, height=600, bg='white')      #Sets the width, height and background colour of the GUI window
+canvas.pack(padx=10, pady=10)                                   #The canvas widget from the Tkinter library
+
+arena = canvas.create_rectangle(250, 50, 950, 500) # robot arena
+
+global treasureAmount
+
 mylist= []
 
 def bubblesort(alist):
@@ -11,3 +30,21 @@ def bubblesort(alist):
 
 bubblesort(mylist)
 print mylist
+
+
+
+
+
+
+gui = Gui(window)
+
+
+rand1 = random.randrange(260, 740, 1)
+rand2 = random.randrange(260, 490, 1)
+
+r2d2 = Robot(rand1, rand2, speed = 8.0, colour='cyan')      #robot calling robot class with random spawning
+r2d2.drawRobot(canvas)
+
+light1 = Light(20, 300, 30, 'green')                        #calls light class
+light1.drawLight(canvas)
+
