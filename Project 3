@@ -19,6 +19,129 @@ global treasureAmount
 
 mylist= []
 
+class Robot:
+    
+    def __init__(self, x, y, speed = 5.0, size = 15, colour = 'blue'):  #defines robot variables
+
+        self.x = x
+        self.y = y
+        self.xEnd = x + size
+        self.yEnd = y + size
+        self._vx = 0
+        self._vy = 0
+        self.speed = speed
+        self.size = size
+        self.colour = colour
+
+    def drawRobot(self, canvas):        #draws robot
+        
+        self.canvas = canvas
+        self.shape = canvas.create_oval(self.x, self.y, self.xEnd, self.yEnd, fill=self.colour)
+
+    def nearestTreasure(self):
+
+        for t in treasureList:
+            
+            if t.found == False:
+
+                if t.x > self.x:
+                    dx = t.x - self.x
+
+                elif t.x < self.x:
+                    dx = self.x - t.x
+
+                else:
+                    dx = 0
+
+                if t.y > self.y:
+                    dy = t.y - self.y
+                
+                elif t.y < self.y:
+                    dy = self.y - t.y
+
+                else:
+                    dy = 0
+
+                d = (dx**2 + dy**2)**0.5
+
+                """if d < 9001:
+                    9001 = d
+                    self.nearestTreasure = t"""
+
+    def distanceTreasure(self, distancex, distancey):
+        
+        if distancex > self.x: 
+            dx = distancex - self.x
+
+        elif distancex < self.x:
+            dx = self.x - distancex
+
+        else:
+            dx = 0
+
+        if distancey > self.y:
+            dy = distancey - self.y
+        
+        elif distancey < self.y:
+            dy = self.y - distancey
+
+        else:
+            dy = 0
+
+        d = (dx**2 + dy**2)**0.5
+        
+        if distancex > self.x:
+            self.vx = (dx / d) * self.speed
+
+        elif distancex < self.x:
+            self.vx = (0-(dx / d)) * self.speed
+
+        else:
+            self.vx = 0
+
+        if distancey > self.y:
+            self.vy = (dy / d) * self.speed
+
+        elif distancey < self.y:
+            self.vy = (0-(dy / d)) * self.speed
+
+        else:
+            self.vy = 0
+
+        self.dLeft = int (d)
+
+    def pathfind(self):
+
+        if self.dLeft > 0 and self.nearestTreasure.found == False:
+            self.x += self.vx
+            self.xEnd += self.vx
+            self.y += self.vy
+            self.yEnd += self.vy
+
+            self.canvas.coords(self.shape, self.x, self.y, self.xEnd, self.yEnd)
+            self.canvas.update()
+            self.dLeft -= 1
+            time.sleep(.01)
+
+        else:
+            if self.nearestTreasure.found == False:
+                self.nearestTreasure = True
+
+    def checkBoundaries(self):
+        
+        if self.x <= 270:
+                self._vx = abs(self._vx)
+
+        if self.x + self.size >= 930:
+                self._vx = -self._vx
+
+        if self.y <= 70:
+                self._vy = abs(self._vy)
+
+        if self.y + self.size >= 480:
+                self._vy = -self._vy
+                
+                
 def bubblesort(alist):
     for num in range(len(alist)-1,0,-1):
         for i in range(num):
