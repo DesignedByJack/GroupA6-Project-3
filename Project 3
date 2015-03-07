@@ -150,6 +150,45 @@ def bubblesort(alist):
                 alist[i] = alist[i+1]
                 alist[i+1] = temp
 
+class Object(object):                       #Parent class for inheritance
+    
+    def __init__(self, x, y, size):
+
+        self.x = x
+        self.y = y
+        self.size = size
+        self.xEnd = x + size
+        self.yEnd = y + size
+        
+
+class Treasure(Object): #Inheritance for Treasure
+      
+    def drawTreasure(self, canvas):         #draws different types of treasure
+
+        self.type = Gui.variable.get()
+
+        if self.type == "Sapphire":
+            self.treasure = canvas.create_oval(self.x, self.y, self.xEnd, self.yEnd)
+            self.score = 250
+            self.colour = 'Blue'
+            
+        elif self.type == "Emerald":
+            self.treasure = canvas.create_oval(self.x, self.y, self.xEnd, self.yEnd)
+            self.score = 500
+            self.colour = 'Green'
+
+        elif self.type == "Ruby":
+            self.treasure = canvas.create_oval(self.x, self.y, self.xEnd, self.yEnd)
+            self.score = 1000
+            self.colour = 'Red' 
+
+
+class Trap(Object): # Inheritance for Trap
+
+    def drawTrap(self, canvas):
+
+        self.canvas = canvas
+        self.rectangle = canvas.create_rectangle(self.x, self.y, self.xEnd, self.yEnd, fill = '')
 
 bubblesort(mylist)
 print mylist
