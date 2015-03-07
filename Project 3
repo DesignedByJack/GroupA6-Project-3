@@ -223,3 +223,7 @@ r2d2.drawRobot(canvas)
 light1 = Light(20, 300, 30, 'green')                        #calls light class
 light1.drawLight(canvas)
 
+window.mainloop()#Keeps the window open while the program is running
+ 
+#END OF PROGRAM
+
