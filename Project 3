@@ -190,13 +190,26 @@ class Trap(Object): # Inheritance for Trap
         self.canvas = canvas
         self.rectangle = canvas.create_rectangle(self.x, self.y, self.xEnd, self.yEnd, fill = '')
 
+class Gui:
+
+    def __init__(self, name):       #makes some labels and buttons
+
+        self.startButton = Button(name, text = "Start", width = 15, command = self.start, font = ("Verdana", 12), bg = "white")
+        self.startButton.place(x = 50, y = 100)
+
+        self.scoreLabel = Label(name, text = "Score: ", width = 10, font = ("Verdana", 12), bg = "white")
+        self.scoreLabel.place(x = 50, y = 50)
+
+        self.updateScoreLabel = Label(name, text = "9001", width = 10, font = ("Verdana", 12), bg = "white")
+        self.updateScoreLabel.place(x= 150, y = 50)
+
+        self.treasureLabel = Label(name, text = "Treasure Collected: ", width = 20, height = 4, font = ("Verdana", 12), bg = "white")
+        self.treasureLabel.place(x = 20, y = 200)
+
+
+
 bubblesort(mylist)
 print mylist
-
-
-
-
-
 
 gui = Gui(window)
 
